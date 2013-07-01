@@ -18,3 +18,4 @@ Setting Up
 10.   `./manage.py runserver`
 11.   access [localhost:8000](localhost:8000)
 
+P.S. You can create a local_settings.py file and activate debug mode by overriding the original settings.

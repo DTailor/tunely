@@ -2,8 +2,8 @@ import os
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__file__))
 
-DEBUG = True
-TEMPLATE_DEBUG = True
+DEBUG = False
+TEMPLATE_DEBUG = False
 COMPRESS_ENABLED = True
 
 ADMINS = (
