@@ -33,6 +33,10 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+tunely/local_settings.py
+
+#Cache
+tune_gazer/static/CACHE/*
 
 #PyCharm files
 .idea

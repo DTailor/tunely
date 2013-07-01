@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+    <div class="player-info">
+        {% include 'pages/player.html' %}
+        <div class="status"></div>
+        <a href="" class="sc-player"></a>
+
+    </div>
+
+    <div class="playlist"></div>
+
+
+{% endblock %}
+
+{% block panel %}
+    <div class="panel">
+        {% include 'components/controls.html' %}
+    </div>
+{% endblock %}
+
+{% block additionalCSS %}
+
+{% endblock %}

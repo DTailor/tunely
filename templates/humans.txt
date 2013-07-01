@@ -1,0 +1,22 @@
+/* TEAM */
+
+    Developer: Dan Croitoru
+    Twitter: @LastSamuray
+    Facebook: https://www.facebook.com/dann.tailor
+    Location: Chisinau, Moldova
+    Contact: dann.croitoru [at] gmail.com
+
+    Music Enthusiast: Dumitru Axentii
+    Twitter: @Dimetreus
+    Facebook: https://www.facebook.com/dimetreus
+    Contact: dimetreus [at] gmail.com
+
+
+/* SITE */
+
+    Last update: 2013/06/24
+    Language:  English
+    Doctype: HTML5, CSS3, JS
+    Technology: Django 1.5
+    Components: Jquery, Bootstrap, SoundCloud, SoundManager2
+

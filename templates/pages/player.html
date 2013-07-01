@@ -1,0 +1,36 @@
+<div class="audioplayer">
+    <div class="audioplayer-playpause start" title="Play"><a href="#">Play</a></div>
+    <div class="audioplayer-bar">
+        <div class="station-title"
+             id="{% if station %}{{ station.station_id }}{% else %}4251976{% endif %}"
+             data-slug="{% if station %}{{ station.slug }}{% endif %}">
+            {% if station %}{{ station.name }}{% else %}Majestic{% endif %}
+        </div>
+    </div>
+    <div class="audioplayer-stations" title="Stations"><i class="icon-reorder"></i></div>
+    <div  id="dd" class="wrapper-dropdown-2" tabindex="1">
+    <div id="content_1"  class="content">
+        <ul class="dropdown">
+            {% for station in stations %}
+                <li><a href="#" class="{{ station.name }}" id="{{ station.station_id }}"
+                       data-slug="{{ station.slug }}"
+                       onclick="return false"><i></i>{{ station.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    </div>
+    <div class="audioplayer-volume">
+        <li class="volume-control">
+            <div class="audioplayer-volume-button" title="Volume"><a href="#" onclick="return false">Volume</a></div>
+            <div class="audioplayer-volume-adjust">
+                <div>
+                    <div class="player-volume-bar" style="height: 100%;"></div>
+                </div>
+            </div>
+        </li>
+    </div>
+
+    <div class="player-end"></div>
+
+</div>
+
