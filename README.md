@@ -13,7 +13,8 @@ Setting Up
 5.   set-up the database configuration
 6.   change the secret key to a more complex one
 7.   run `syncdb`
-8.   chmod +x manage.py
-9.   `./manage.py runserver`
-10.   access [localhost:8000](localhost:8000)
+8.   run `migrate tune_gazer`
+9.   `chmod +x manage.py`
+10.   `./manage.py runserver`
+11.   access [localhost:8000](localhost:8000)
 
