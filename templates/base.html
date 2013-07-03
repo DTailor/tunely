@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html lang="en">
+<html lang="en" ng-app="tunely">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="majestic, fhinq, ambient, indie current, chilled dubstep music, hip-hop,music, radio, soundcloud, internet radio">
+    <meta name="keywords"
+          content="majestic, fhinq, ambient, indie current, chilled dubstep music, hip-hop,music, radio, soundcloud, internet radio">
     <meta name="description" content="Music stations with sets from popular youtube channels">
     <link rel="SHORTCUT ICON" HREF="{% static 'images/icon.png' %}">
     <link type="text/plain" rel="author" href="http://tunely.co/humans.txt"/>
     <title>Tunely{% if not main %} / {{ station.name }}{% endif %}</title>
 
-    <meta id="social_graph_title" property="og:title" content="{% if main %}Tunely{% else %}{{ station.name }}{% endif %}"/>
+    <meta id="social_graph_title" property="og:title"
+          content="{% if main %}Tunely{% else %}{{ station.name }}{% endif %}"/>
     <meta property="og:type" content="website"/>
     <meta property="og:image" content="http://tunely.co{% static 'images/tunely_og.png' %}"/>
-    <meta id="social_graph_link" property="og:url" content="http://tunely.co/{% if  main %}{% else %}{{ station.slug }}{% endif %}">
+    <meta id="social_graph_link" property="og:url"
+          content="http://tunely.co/{% if  main %}{% else %}{{ station.slug }}{% endif %}">
 
     {% include 'components/analytics.html' %}
 
@@ -30,9 +33,9 @@
 
         {% if single_station %}
             <style>
-            .audioplayer-bar{
-                width: 19.9em;
-            }
+                .audioplayer-bar {
+                    width: 19.9em;
+                }
             </style>
         {% endif %}
         {% block additionalCSS %}
@@ -40,9 +43,8 @@
     {% endcompress %}
 
 
-
 </head>
-<body>
+<body ng-controller="tune_player">
 
 <header>
     {% block content %}
@@ -57,11 +59,13 @@
     {% endblock %}
 
 </div>
+
 <!--/span-->
 
 
 <footer>
-        <div class="fb-like" data-href="https://www.facebook.com/tunely.co" data-send="true" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+    <div class="fb-like" data-href="https://www.facebook.com/tunely.co" data-send="true" data-layout="button_count"
+         data-width="450" data-show-faces="false"></div>
 
     <a id="feedback_btn" rel="leanModal" name="feedback" href="#feedback">Write me</a>
 
@@ -81,30 +85,65 @@
 {% compress js %}
     <script>
 
-    var Player = {
-        client_id: '6dc6a4ae9270aa4e4af5b07e58efa556',
-        tracklist: '', // song-list array
-        volume: 100, // volume controlled by user
-        sc: '', // Sound_cloud controller.
-        slug: '{{ station.slug }}',
-        node: '',
-        station: '{{ station.name }}',
-        playlist_id: '',
-        first_start: false,
-        checker: '',
-        volumeHeight: 62,
-        debug: false
+        var Player = {
+            client_id: '6dc6a4ae9270aa4e4af5b07e58efa556',
+            tracklist: '', // song-list array
+            volume: 100, // volume controlled by user
+            sc: '', // Sound_cloud controller.
+            slug: '{{ station.slug }}',
+            node: '',
+            station: '{{ station.name }}',
+            playlist_id: '',
+            first_start: false,
+            checker: '',
+            volumeHeight: 62,
+            debug: false
 
-    };
+        };
+
+
     </script>
 
     <script type="text/javascript" src="{% static 'js/jquery-1.9.1.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/angular-resource.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/player.js' %}"></script>
+    {#    <script type="text/javascript" src="{% static 'js/player.js' %}"></script>#}
     <script type="text/javascript" src="{% static 'js/jquery.backstretch.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.autocomplete.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.leanModal.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/sdk.js' %}"></script>
+    <script>
+        var tunely_app = angular.module('tunely', ['ngResource']);
+        angular.module('tunely').constant("init_constants", {
+
+            'Player': {
+                client_id: '6dc6a4ae9270aa4e4af5b07e58efa556',
+                tracklist: '', // song-list array
+                volume: 100, // volume controlled by user
+                sc: '', // Sound_cloud controller.
+                slug: '{{ station.slug }}',
+                node: '',
+                station: '{{ station.name }}',
+                playlist_id: '',
+                first_start: false,
+                checker: '',
+                volumeHeight: 62,
+                debug: false    },
+
+            'radio_stations': [
+                {% for station in stations %}
+                    {
+                        'name': '{{station.name}}',
+                        'station_id': '{{ station.station_id}}',
+                        'slug': '{{ station.slug }}'
+                    },
+                {% endfor %}
+            ]
+        })
+    </script>
+    <script type="text/javascript" src="{% static 'js/tunegular.js' %}"></script>
+
 
 {% endcompress %}
 
@@ -124,17 +163,17 @@
             {% endfor %}
         ], {duration: 25000, fade: 750});
     </script>
-{#        <style>#}
-{#            body {#}
-{#                background: url('/media/{{ background.bg_image }}') no-repeat center center fixed;#}
-{#                -webkit-background-size: cover;#}
-{#                -moz-background-size: cover;#}
-{#                -o-background-size: cover;#}
-{#                background-size: cover;#}
-{#                background: url('/media/{{ background.bg_image }}') no-repeat center center fixed;#}
-{#            }#}
-{#        </style>#}
-    {% endif %}
+    {#        <style>#}
+    {#            body {#}
+    {#                background: url('/media/{{ background.bg_image }}') no-repeat center center fixed;#}
+    {#                -webkit-background-size: cover;#}
+    {#                -moz-background-size: cover;#}
+    {#                -o-background-size: cover;#}
+    {#                background-size: cover;#}
+    {#                background: url('/media/{{ background.bg_image }}') no-repeat center center fixed;#}
+    {#            }#}
+    {#        </style>#}
+{% endif %}
 
 </body>
 
