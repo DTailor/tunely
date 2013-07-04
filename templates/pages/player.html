@@ -1,27 +1,19 @@
-<div class="audioplayer">
-    <div class="audioplayer-playpause start" title="Play"><a href="#">Play</a></div>
+<div class="audioplayer" ng-class="{ 'audioplayer-playing':player.playing }">
+    <div class="audioplayer-playpause" ng-class="{ playing:player.playing, pause:!player.playing }" title="Play" ng-click="play_pause_player()"><a href="#">Play</a></div>
     <div class="audioplayer-bar">
         <div class="station-title"
-             id="{% if station %}{{ station.station_id }}{% else %}4251976{% endif %}"
-             data-slug="{% if station %}{{ station.slug }}{% endif %}">
-            {% if station %}{{ station.name }}{% else %}Majestic{% endif %}
+             id="<< player.playlist_id >>"
+             data-slug="<< player.slug >>">
+            << player.station >>
         </div>
     </div>
-    <div class="audioplayer-stations" title="Stations" ng-click="openStations()"><i class="icon-reorder"></i></div>
+    <div class="audioplayer-stations" title="Stations" ng-click="open_stations()"><i class="icon-reorder"></i></div>
     <div id="dd" class="wrapper-dropdown-2" tabindex="1">
         <div id="content_1" class="content">
             <ul class="dropdown">
-                <li ng-repeat="station in stations | shuffle">
+                <li ng-repeat="station in stations">
                     <a href="#" class="<< station.name >>" id="<< station.soundcloud_id >>" data-slug="<< station.slug >>"
                                                        onclick="return false"><i></i><< station.name >></a>
-                </li>
-
-
-                {#            {% for station in stations %}#}
-                {#                <li><a href="#" class="{{ station.name }}" id="{{ station.station_id }}"#}
-                {#                       data-slug="{{ station.slug }}"#}
-                {#                       onclick="return false"><i></i>{{ station.name }}</a></li>#}
-                {#            {% endfor %}#}
             </ul>
         </div>
     </div>
