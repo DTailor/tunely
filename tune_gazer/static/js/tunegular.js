@@ -4,22 +4,32 @@ tunely_app.config(function($interpolateProvider) {
 });
 
 function tune_player($scope, init_constants) {
-    $scope.player =
-        {
-            client_id: '6dc6a4ae9270aa4e4af5b07e58efa556',
-            tracklist: '', // song-list array
-            volume: 100, // volume controlled by user
-            sc: '', // Sound_cloud controller.
-            slug: '',
-            node: '',
-            station: '',
-            playlist_id: '',
-            first_start: false,
-            checker: '',
-            volumeHeight: 62,
-            debug: false
-        };
+//    Initializing
+    $scope.player = init_constants['Player'];
     $scope.stations = init_constants['radio_stations'];
-//    console.log(init_constants['radio_stations']);
+
+    $scope.player.sc =  SC.initialize({
+        client_id: $scope.player.client_id
+    });
+
+
+    $scope.openStations = function(){
+        $('.wrapper-dropdown-2').toggleClass('active');
+        $('.audioplayer-stations').toggleClass('hover');
+    }
+
 
 }
+
+tunely_app.filter('shuffle', function() {
+    var shuffledArr = [],
+        shuffledLength = 0;
+    return function(arr) {
+        var o = arr.slice(0, arr.length);
+        if (shuffledLength == arr.length) return shuffledArr;
+        for(var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+        shuffledArr = o;
+        shuffledLength = o.length;
+        return o;
+    };
+});

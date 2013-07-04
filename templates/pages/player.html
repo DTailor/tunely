@@ -7,21 +7,23 @@
             {% if station %}{{ station.name }}{% else %}Majestic{% endif %}
         </div>
     </div>
-    <div class="audioplayer-stations" title="Stations"><i class="icon-reorder"></i></div>
-    <div  id="dd" class="wrapper-dropdown-2" tabindex="1">
-    <div id="content_1"  class="content">
-        <ul class="dropdown">
-            <li ng-repeat="station in stations"><< station.name >></li>
+    <div class="audioplayer-stations" title="Stations" ng-click="openStations()"><i class="icon-reorder"></i></div>
+    <div id="dd" class="wrapper-dropdown-2" tabindex="1">
+        <div id="content_1" class="content">
+            <ul class="dropdown">
+                <li ng-repeat="station in stations | shuffle">
+                    <a href="#" class="<< station.name >>" id="<< station.soundcloud_id >>" data-slug="<< station.slug >>"
+                                                       onclick="return false"><i></i><< station.name >></a>
+                </li>
 
 
-
-{#            {% for station in stations %}#}
-{#                <li><a href="#" class="{{ station.name }}" id="{{ station.station_id }}"#}
-{#                       data-slug="{{ station.slug }}"#}
-{#                       onclick="return false"><i></i>{{ station.name }}</a></li>#}
-{#            {% endfor %}#}
-        </ul>
-    </div>
+                {#            {% for station in stations %}#}
+                {#                <li><a href="#" class="{{ station.name }}" id="{{ station.station_id }}"#}
+                {#                       data-slug="{{ station.slug }}"#}
+                {#                       onclick="return false"><i></i>{{ station.name }}</a></li>#}
+                {#            {% endfor %}#}
+            </ul>
+        </div>
     </div>
     <div class="audioplayer-volume">
         <li class="volume-control">
