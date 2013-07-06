@@ -1,17 +1,17 @@
-<div class="skip_song"><i class="icon-step-forward"></i></div>
+<div class="skip_song" ng-click="skip_track()"><i class="icon-step-forward"></i></div>
 
-<div class="song_user"></div>
-<div class="song_title"></div>
+<div class="song_user"> << player.current_track.user.username >> </div>
+<div class="song_title"> << player.current_track.title >></div>
 
 
 <div class="sc_button">
-    <a style="text-decoration: none;" target="_blank" href=""><i class="icon-soundcloud"></i></a>
+    <a style="text-decoration: none;" target="_blank" href="<< player.current_track.permalink_url >>"><i class="icon-soundcloud"></i></a>
 </div>
 <div class="social_share">
-    <a id="fb_station_share" style="text-decoration: none;" href="#" target="_blank">
+    <a id="fb_station_share" style="text-decoration: none;" href="http://www.facebook.com/sharer.php?u=<< 'http://tunely.co/' + player.slug >>" target="_blank">
         <i class="icon-facebook"></i>
     </a>
-    <a id="tw_station_share" style="text-decoration: none;" href="#" target="_blank">
+    <a id="tw_station_share" style="text-decoration: none;" href="http://twitter.com/share?text=Listen to  << player.station >> station @tunelyCo&url=http://tunely.co/<< player.slug >>" target="_blank">
         <i class="icon-twitter"></i>
     </a>
 </div>

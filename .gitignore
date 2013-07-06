@@ -33,6 +33,7 @@ nosetests.xml
 .mr.developer.cfg
 .project
 .pydevproject
+db/*
 tunely/local_settings.py
 
 #Cache
