@@ -5,13 +5,21 @@ tunely_app.config(function ($interpolateProvider) {
 
 function tune_player($scope, init_constants) {
 
-
 //    FUNCTIONS  AND HELPERS
 
 //    TRACKLIST SUFFLER
     var shuffle_tracks = function (o) { //v1.0
         for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
         return o;
+    };
+
+
+//  INITIALIZE SC
+
+    $scope.sc_init = function () {
+        $scope.player.sc = SC.initialize({
+            client_id: $scope.player.client_id
+        });
     };
 
 
@@ -37,24 +45,9 @@ function tune_player($scope, init_constants) {
 
 //    STATIONS TOGGLER
     $scope.open_stations = function () {
+        $('.panel').removeClass('active');
         $('.wrapper-dropdown-2').toggleClass('active');
         $('.audioplayer-stations').toggleClass('hover');
-    };
-
-//    SHARE BUTTONS
-
-    $scope.set_station_shares = function () {
-        var station_link = 'http://tunely.co/' + $scope.player.slug;
-
-        var fb_link = "http://www.facebook.com/sharer.php?u=" + station_link;
-        $('#fb_station_share').attr('href', fb_link);
-
-        var tw_text = 'Listen to ' + $scope.player.station + ' station @tunelyCo ';
-        var tw_link = "http://twitter.com/share?text=" + tw_text + "&url=" + station_link;
-        $('#tw_station_share').attr('href', tw_link);
-
-        $('#social_graph_title').attr('content', $scope.player.station);
-        $('#social_graph_link').attr('content', station_link);
     };
 
 //  SET NEXT TRACK
@@ -62,7 +55,9 @@ function tune_player($scope, init_constants) {
     $scope.set_tracks = function () {
 
         if ($scope.player.next_track) {
-            $scope.player.current_track = $scope.plater.next_track;
+            console.log('next song to be played:');
+            $scope.player.current_track = $scope.player.next_track;
+            console.log($scope.player.current_track);
             $scope.player.next_track = $scope.player.tracklist[ $scope.player.tracklist.length - 1];
             $scope.player.tracklist.pop($scope.player.tracklist[$scope.player.tracklist.length - 1]);
         } else {
@@ -70,28 +65,20 @@ function tune_player($scope, init_constants) {
             $scope.player.tracklist.pop($scope.player.tracklist[$scope.player.tracklist.length - 1]);
             $scope.player.next_track = $scope.player.tracklist[ $scope.player.tracklist.length - 1];
             $scope.player.tracklist.pop($scope.player.tracklist[$scope.player.tracklist.length - 1]);
+            console.log($scope.player.current_track);
         }
     };
 
 //    STREAM INITIALIZATION
 
-    $scope.init_player = function(){
+    $scope.init_player = function () {
 //        document.title = $scope.current_track.title;
-
-        SC.stream('/tracks/'+$scope.player.current_track.id, {
-                onplay: function () {
-
-                },
+        console.log('init player');
+        SC.stream('/tracks/' + $scope.player.current_track.id, {
                 onload: function (status) {
-                    //  Set the next track as current track
-//                    setNextTrack();
-//                    if (!status) {
-//                        resetPlayerBar();
-//                        initPlayer();
-//                    }
                 },
                 onfinish: function () {
-//                    resetPlayerBar();
+                    console.log('finished_track');
                     $scope.set_tracks();
                     $scope.init_player();
                 },
@@ -102,11 +89,11 @@ function tune_player($scope, init_constants) {
 
             function (b) {
                 $scope.stream = b;
+                if ($scope.player.mute) {
+                    $scope.stream.setVolume(0);
+                }
                 $scope.stream.play();
-//                playerHandler(b);
-//                if (!Player.first_start) {
-//                    b.play();
-//                    window.stream.setVolume(Player.volume);
+                $scope.$apply();
 //                }
             }
 
@@ -118,40 +105,115 @@ function tune_player($scope, init_constants) {
 
     $scope.play_pause_player = function () {
 
-        $scope.player.playing = !$scope.player.playing;
-        if ($scope.player.first_start) {
-            $scope.set_tracks();
-            $scope.player.first_start = false;
-            $scope.init_player();
+        if ($scope.player.playing) {
+            $scope.stream.pause();
+            console.log('paused')
         }
+        else {
+            if ($scope.player.first_start) {
+                $scope.set_tracks();
+                $scope.player.first_start = false;
+                $scope.init_player();
+                console.log('start song');
+                $('.panel').toggleClass('active');
+            } else {
+                $scope.stream.play();
+                console.log('resume')
+            }
+        }
+        $scope.player.playing = !$scope.player.playing;
 
+    };
+
+//  VIEW TRACK INFO
+
+    $scope.view_track_info = function () {
+        if (!$scope.player.first_start) {
+            $('.panel').toggleClass('active');
+            $('.wrapper-dropdown-2').removeClass('active');
+            $('.audioplayer-stations').removeClass('hover');
+        }
+    };
+
+
+//    SELECT STATION
+
+    $scope.select_station = function (station) {
+        $scope.player.sc.streamStopAll();
+        $scope.sc_init();
+        $scope.player.station = station.name;
+        $scope.player.playlist_id = station.soundcloud_id;
+        $scope.player.slug = station.slug;
+        $scope.get_tracklist($scope.player.playlist_id, $scope.player.client_id);
+        $scope.player.next_track = false;
+        $scope.set_tracks();
+        $('.wrapper-dropdown-2').removeClass('active');
+        $('.audioplayer-stations').removeClass('hover');
+        $scope.init_player();
+        if ($scope.player.first_start) {
+            $('.panel').toggleClass('active');
+            $scope.player.first_start = false;
+        }
+        $scope.player.playing = true;
+
+    };
+
+// SKIP TRACK
+
+    $scope.skip_track = function () {
+        $scope.player.sc.streamStopAll();
+        $scope.sc_init();
+        $scope.set_tracks();
+        $scope.init_player();
+    };
+
+
+//    MUTE_UNMUTE SOUND
+    $scope.mute_unmute = function () {
+        console.log('mute_unmute');
+        if ($scope.player.mute) {
+            $scope.stream.setVolume($scope.player.volume);
+            $scope.player.mute = false;
+        } else {
+            $scope.stream.setVolume(0);
+            $scope.player.mute = true;
+
+        }
+    };
+
+//    VOLUME BAR
+
+    $scope.volume_bar = function ($event) {
+
+        var clickY = $('.player-volume-bar').height() - ($event.pageY - $('.player-volume-bar').offset().top);
+        $scope.player.volume = Math.round(( clickY / $scope.player.volumeHeight )*100);
+        if ($scope.player.volume > 100) {
+            $scope.player.volume = 100;
+        }
+        else if ($scope.player.volume < 0) {
+            $scope.player.volume = 0;
+        }
+        $('.player-volume-bar').css({'height': $scope.player.volume + '%'});
+        $scope.stream.setVolume($scope.player.volume);
+
+    };
+//    VOLUME ADJUSTMENT
+
+    $scope.adjust_handler = function ($event) {
+        if (!$scope.player.first_start) {
+            if ($event.target.className === "audioplayer-volume-button" || $event.target.className === "volume-icon") {
+                $scope.mute_unmute();
+            }
+            else{$scope.volume_bar($event);}
+        }
     };
 
 
     $scope.player = init_constants['Player'];
     $scope.stations = init_constants['radio_stations'];
     $scope.stream = false;
-    //    Initializing the soundcloud streamer
-    $scope.player.sc = SC.initialize({
-        client_id: $scope.player.client_id
-    });
+    $scope.sc_init();
     $scope.get_tracklist($scope.player.playlist_id, $scope.player.client_id);
-    $scope.set_station_shares();
 
 
 }
-
-
-//
-//tunely_app.filter('shuffle', function () {
-//    var shuffledArr = [],
-//        shuffledLength = 0;
-//    return function (arr) {
-//        var o = arr.slice(0, arr.length);
-//        if (shuffledLength == arr.length) return shuffledArr;
-//        for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
-//        shuffledArr = o;
-//        shuffledLength = o.length;
-//        return o;
-//    };
-//});

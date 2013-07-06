@@ -1,6 +1,7 @@
-<div class="audioplayer" ng-class="{ 'audioplayer-playing':player.playing }">
-    <div class="audioplayer-playpause" ng-class="{ playing:player.playing, pause:!player.playing }" title="Play" ng-click="play_pause_player()"><a href="#">Play</a></div>
-    <div class="audioplayer-bar">
+<div class="audioplayer" ng-class="{ 'audioplayer-playing':player.playing, 'audioplayer-mute':player.mute } ">
+    <div class="audioplayer-playpause" ng-class="{ playing:player.playing, pause:player.playing }" title="Play"
+         ng-click="play_pause_player()"><a href="#">Play</a></div>
+    <div class="audioplayer-bar" ng-click="view_track_info()">
         <div class="station-title"
              id="<< player.playlist_id >>"
              data-slug="<< player.slug >>">
@@ -12,15 +13,17 @@
         <div id="content_1" class="content">
             <ul class="dropdown">
                 <li ng-repeat="station in stations">
-                    <a href="#" class="<< station.name >>" id="<< station.soundcloud_id >>" data-slug="<< station.slug >>"
-                                                       onclick="return false"><i></i><< station.name >></a>
+                    <a href="#" class="<< station.name >>" id="<< station.soundcloud_id >>"
+                       data-slug="<< station.slug >>"
+                       onclick="return false"
+                       ng-click="select_station(station)"><i></i><< station.name >></a>
             </ul>
         </div>
     </div>
-    <div class="audioplayer-volume">
+    <div class="audioplayer-volume" ng-click="adjust_handler($event)">
         <li class="volume-control">
-            <div class="audioplayer-volume-button" title="Volume"><a href="#" onclick="return false">Volume</a></div>
-            <div class="audioplayer-volume-adjust">
+            <div class="audioplayer-volume-button" title="Volume"><a href="#" onclick="return false" class="volume-icon">Volume</a></div>
+            <div class="audioplayer-volume-adjust" >
                 <div>
                     <div class="player-volume-bar" style="height: 100%;"></div>
                 </div>
