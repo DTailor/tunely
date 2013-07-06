@@ -209,11 +209,42 @@ function tune_player($scope, init_constants) {
     };
 
 
+
+//    FEEDBACK
+
+    $scope.send_feedback = function(feedback){
+        if($scope.feedback.length){
+            console.log($scope.feedback.length);
+            var msg = $('#fdb_text').val();
+            var address = $('form[name=write_me]').attr('action');
+            var dataString = 'feedback=' + msg;
+            $('#fdb_text').val('');
+            $('#feedback').fadeOut();
+            $('#lean_overlay').hide();
+
+            var request = $.ajax({
+                type: "POST",
+                url: address,
+                data: dataString
+
+            });
+        }
+    };
+
+
     $scope.player = init_constants['Player'];
     $scope.stations = init_constants['radio_stations'];
+    $scope.feedback = '';
     $scope.stream = false;
     $scope.sc_init();
     $scope.get_tracklist($scope.player.playlist_id, $scope.player.client_id);
+
+    $(function () {
+        $('a[rel*=leanModal]').leanModal({
+            top: 75,
+            closeButton: ".modal_close"
+        });
+    });
 
 
 }

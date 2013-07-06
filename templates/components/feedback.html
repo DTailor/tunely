@@ -2,8 +2,8 @@
     <form name="write_me" action="{% url 'feedback' %}">
         Feedback, improvement ideas, preferred music channels on youtube. Write me about anything. <br />
         Add your e-mail if you're waiting for a response.
-        <textarea required="t" id="fdb_text" style="width: 335px;max-width: 335px" rows="6"></textarea>
-        <button id="fdb_send" class="btn btn-large btn-block btn-primary" type="button">Send</button>
+        <textarea required="true" id="fdb_text" style="width: 335px;max-width: 335px" ng-model="feedback" rows="6"><< feedback >></textarea>
+        <button ng-click="send_feedback(feedback)" class="btn btn-large btn-block btn-primary" type="button">Send</button>
 
     </form>
 </div>

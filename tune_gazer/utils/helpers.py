@@ -48,7 +48,7 @@ import os
 def mail(to, subject, text, ):
     msg = MIMEMultipart()
 
-    msg['From'] = gmail_user
+    msg['From'] = settings.GMAIL_USER
     msg['To'] = to
     msg['Subject'] = subject
 
