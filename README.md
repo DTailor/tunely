@@ -26,11 +26,10 @@ P.S. You can create a local_settings.py file and activate debug mode by overridi
 To Do
 -----
 
-1.   Re-write the player.js using angularjs.
-2.   Make the song fetcher and playlist creator runnable from console.
-3.   New playlist selector concept, more user friendly.
-4.   Sitemap
-5.   Image feed from tumbrl
-6.   And a lot of tasks which are stored in asana :D
+1.   Make the song fetcher and playlist creator runnable from console.
+2.   New playlist selector concept, more user friendly.
+3.   Sitemap
+4.   Image feed from tumbrl
+5.   And a lot of tasks which are stored in asana :D
 
 P.S. They're not written in the execution order, except the first one.
