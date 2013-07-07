@@ -84,10 +84,9 @@
 <!--js imports-->
 {% compress js %}
     <script type="text/javascript" src="{% static 'js/jquery-1.9.1.js' %}"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
     <script type="text/javascript" src="{% static 'js/angular-resource.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/angular.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
-    {#    <script type="text/javascript" src="{% static 'js/player.js' %}"></script>#}
     <script type="text/javascript" src="{% static 'js/jquery.backstretch.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.autocomplete.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.leanModal.min.js' %}"></script>
@@ -145,16 +144,6 @@
             {% endfor %}
         ], {duration: 25000, fade: 750});
     </script>
-    {#        <style>#}
-    {#            body {#}
-    {#                background: url('/media/{{ background.bg_image }}') no-repeat center center fixed;#}
-    {#                -webkit-background-size: cover;#}
-    {#                -moz-background-size: cover;#}
-    {#                -o-background-size: cover;#}
-    {#                background-size: cover;#}
-    {#                background: url('/media/{{ background.bg_image }}') no-repeat center center fixed;#}
-    {#            }#}
-    {#        </style>#}
 {% endif %}
 
 </body>
