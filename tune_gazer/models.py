@@ -6,7 +6,7 @@ class Station(models.Model):
     station_id = models.CharField(max_length=50, blank=True, null=True)
     public = models.BooleanField(default=False)
     slug = models.SlugField(max_length=255, blank=True, null=True)
-    # access = models.PositiveIntegerField(default=0)
+    icon = models.ImageField(upload_to='station_icon', blank=True, null=True)
 
     def __unicode__(self):
         return self.name

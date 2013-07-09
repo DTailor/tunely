@@ -1,0 +1,13 @@
+<div id="dd" ng-class="{ 'active':player.playlist_open }" class="playlister" tabindex="1">
+    <div class="stations_content">
+        <a class="tune_station" href="#" ng-repeat="station in stations" class="<< station.name >>"
+           id="<< station.soundcloud_id >>"
+           data-slug="<< station.slug >>"
+           data-title="<< station.name >>"
+           data-description="<< station.slug >>"
+           onclick="return false"
+           ng-click="select_station(station)">
+            <img src="/media/<< station.icon >>">
+        </a>
+    </div>
+</div>
