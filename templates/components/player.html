@@ -9,14 +9,14 @@
         </div>
     </div>
     <div class="audioplayer-stations" title="Stations" ng-click="open_stations()"><i class="icon-reorder"></i></div>
-    <div id="dd" class="wrapper-dropdown-2" tabindex="1">
+    <div id="dd" ng-class="{ 'active':player.playlist_open, 'inactive':!player.playlist_open }" class="playlister" tabindex="1">
         <div id="content_1" class="content">
             <ul class="dropdown">
-                <li ng-repeat="station in stations">
-                    <a href="#" class="<< station.name >>" id="<< station.soundcloud_id >>"
-                       data-slug="<< station.slug >>"
-                       onclick="return false"
-                       ng-click="select_station(station)"><i></i><< station.name >></a>
+{#                <li ng-repeat="station in stations">#}
+{#                    <a href="#" class="<< station.name >>" id="<< station.soundcloud_id >>"#}
+{#                       data-slug="<< station.slug >>"#}
+{#                       onclick="return false"#}
+{#                       ng-click="select_station(station)"><i></i><< station.name >></a>#}
             </ul>
         </div>
     </div>

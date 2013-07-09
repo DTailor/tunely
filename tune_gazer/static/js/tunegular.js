@@ -45,9 +45,7 @@ function tune_player($scope, init_constants) {
 
 //    STATIONS TOGGLER
     $scope.open_stations = function () {
-        $('.panel').removeClass('active');
-        $('.wrapper-dropdown-2').toggleClass('active');
-        $('.audioplayer-stations').toggleClass('hover');
+        $scope.player.playlist_open = !$scope.player.playlist_open;
     };
 
 //  SET NEXT TRACK
