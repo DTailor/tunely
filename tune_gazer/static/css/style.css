@@ -87,7 +87,8 @@ a {
     padding-bottom: 15px;
     /*float: left;*/
     display: inline-block;
-
+    position: relative;
+    top: 5px;
 }
 
 .social_share {
@@ -101,7 +102,7 @@ a {
 .icon-soundcloud, .icon-facebook, .icon-twitter {
     font-size: 25px;
     color: #fff;
-    margin-right: 18px;
+    margin-right: 4px;
     -webkit-transition: color .5s;
     -moz-transition: color .5s;
     -o-transition: color .5s;
