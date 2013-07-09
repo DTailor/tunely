@@ -128,8 +128,7 @@ function tune_player($scope, init_constants) {
     $scope.view_track_info = function () {
         if (!$scope.player.first_start) {
             $('.panel').toggleClass('active');
-            $('.wrapper-dropdown-2').removeClass('active');
-            $('.audioplayer-stations').removeClass('hover');
+            $scope.player.playlist_open = false;
         }
     };
 
@@ -145,8 +144,7 @@ function tune_player($scope, init_constants) {
         $scope.get_tracklist($scope.player.playlist_id, $scope.player.client_id);
         $scope.player.next_track = false;
         $scope.set_tracks();
-        $('.wrapper-dropdown-2').removeClass('active');
-        $('.audioplayer-stations').removeClass('hover');
+        $scope.player.playlist_open = false;
         $scope.init_player();
         if ($scope.player.first_start) {
             $('.panel').toggleClass('active');
