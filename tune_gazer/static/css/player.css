@@ -345,8 +345,8 @@ li.volume-control:hover > .audioplayer-volume-adjust {
 
 .stations_content {
     position: relative;
-
-    background: #2c3e50;
+    float: left;
+    /*background: #2c3e50;*/
     -webkit-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
     -moz-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
     -ms-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
@@ -357,8 +357,9 @@ li.volume-control:hover > .audioplayer-volume-adjust {
 .playlister {
     position: absolute;
     width: 100%;
-    background: #2c3e50;
+    background: rgba(52, 73, 94, 0.75);
     display: none;
+    margin-top: 56px;
 }
 
 .playlister.active {
@@ -386,13 +387,15 @@ li.volume-control:hover > .audioplayer-volume-adjust {
 .tune_station::before {
     content: attr(data-title);
     font-size: 18px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(255, 255, 255, 0.78);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.49);
     position: relative;
     top: 25px;
 }
 
 .tune_station::after {
     content: attr(data-description);
+    color: rgba(255, 255, 255, 0.78);
     font-size: 15px;
     position: relative;
     top: -60px;

@@ -23,14 +23,14 @@
     {% load compress %}
 
     <!--css imports-->
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    {#    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">#}
     <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
     {% compress css %}
-{#        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"/>#}
-{#        <link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}"/>#}
+        <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"/>
+        {#        <link rel="stylesheet" href="{% static 'css/bootstrap-responsive.css' %}"/>#}
         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         <link rel="stylesheet" href="{% static 'css/player.css' %}"/>
-{#        <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">#}
+        {#        <link rel="stylesheet" href="{% static 'css/font-awesome.css' %}">#}
         <link rel="stylesheet" href="{% static 'css/font-awesome-social.css' %}">
 
         {% if single_station %}
@@ -53,8 +53,7 @@
     {% endblock %}
 
 </header>
-
-
+{% include 'components/stations.html' %}
 <div class="info_panel">
     <div class="overlay"></div>
     {% block  panel %}
@@ -84,9 +83,9 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 <!--js imports-->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
+<script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
 {% compress js %}
     <script type="text/javascript" src="{% static 'js/angular-resource.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.backstretch.min.js' %}"></script>
@@ -113,7 +112,7 @@
                 volumeHeight: 62,
                 mute: false,
                 debug: false,
-                playlist_open:false
+                playlist_open: false
             },
 
             'radio_stations': [

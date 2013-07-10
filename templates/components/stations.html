@@ -1,6 +1,6 @@
 <div id="dd" ng-class="{ 'active':player.playlist_open }" class="playlister" tabindex="1">
-    <div class="stations_content">
-        <a class="tune_station" href="#" ng-repeat="station in stations" class="<< station.name >>"
+    <div class="stations_content" ng-repeat="station in stations">
+        <a class="tune_station" href="#" class="<< station.name >>"
            id="<< station.soundcloud_id >>"
            data-slug="<< station.slug >>"
            data-title="<< station.name >>"
