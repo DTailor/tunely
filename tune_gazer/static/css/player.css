@@ -393,10 +393,11 @@ li.volume-control:hover > .audioplayer-volume-adjust {
     top: 25px;
 }
 
-.tune_station::after {
-    content: attr(data-description);
+.station_genres {
     color: rgba(255, 255, 255, 0.78);
     font-size: 15px;
     position: relative;
     top: -60px;
+    left: 110px;
+    width: calc(100% -107px);
 }
