@@ -19,14 +19,13 @@
     src: local('Lato Bold'), local('Lato-Bold'), url(http://themes.googleusercontent.com/static/fonts/lato/v6/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
 }
 
+/*@font-face {*/
+    /*font-family: "HelveticaNeueLTStd";*/
+    /*src: url("/static/font/font-face/HelveticaNeueLTStd.otf");*/
+/*}*/
+/**/
 @font-face {
-    font-family: "HelveticaNeueLTStd";
-    src: url("/static/font/font-face/HelveticaNeueLTStd.otf");
-}
-
-@font-face {
-    font-family: 'HelveticaNeueLTCom-Bd';
-    src: url("/static/font/font-face/HelveticaNeueLTCom-Bd.ttf");
+    font-family: 'Open Sans', sans-serif;
 }
 
 header {

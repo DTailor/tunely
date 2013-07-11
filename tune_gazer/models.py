@@ -20,7 +20,6 @@ class Track(models.Model):
     sc_id = models.IntegerField(max_length=50, blank=True, null=True)
     soundcloud = models.BooleanField(default=False)
     station_name = models.ForeignKey(Station, blank=True, null=True)
-    # ban = models.PositiveIntegerField(default=0, blank=True, null=True)
 
     def __unicode__(self):
         return self.yt_name
