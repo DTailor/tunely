@@ -7,6 +7,7 @@ class Station(models.Model):
     public = models.BooleanField(default=False)
     slug = models.SlugField(max_length=255, blank=True, null=True)
     icon = models.ImageField(upload_to='station_icon', blank=True, null=True)
+    description = models.TextField(max_length=255, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
