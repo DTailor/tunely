@@ -1,3 +1,9 @@
+// Disable page scrolling
+
+document.body.scroll = "no";
+document.body.style.overflow = 'hidden';
+document.height = window.innerHeight;
+
 tunely_app.config(function ($interpolateProvider) {
     $interpolateProvider.startSymbol('<<');
     $interpolateProvider.endSymbol('>>');
@@ -249,3 +255,4 @@ function tune_player($scope, $http, init_constants) {
 
 
 }
+
