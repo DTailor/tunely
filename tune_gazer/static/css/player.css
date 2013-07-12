@@ -98,7 +98,7 @@
     margin-top: 20px;
     text-align: center;
     font-size: 20px;
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px #474747;
 }
 
 .audioplayer-bar {
@@ -360,12 +360,18 @@ li.volume-control:hover > .audioplayer-volume-adjust {
     position: absolute;
     width: 100%;
     background: rgba(52, 73, 94, 0.75);
-    display: none;
+    opacity: 0;
+    visibility: hidden;
     margin-top: 56px;
+    -webkit-transition: opacity 0.35s ease-out;
+    -moz-transition-duration: opacity 0.35s ease-out;
+    -o-transition-duration: opacity 0.35s ease-out;
+    transition-duration: opacity 0.35s ease-out;
 }
 
 .playlister.active {
-    display: block;
+    opacity: 1;
+    visibility: visible;
 }
 
 .tune_station {
@@ -391,7 +397,7 @@ li.volume-control:hover > .audioplayer-volume-adjust {
     font-size: 18px;
     color: rgba(255, 255, 255, 0.78);
     border-bottom: 1px solid rgba(255, 255, 255, 0.49);
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px #474747;
     position: relative;
     top: 25px;
 }
@@ -403,5 +409,5 @@ li.volume-control:hover > .audioplayer-volume-adjust {
     top: -60px;
     left: 110px;
     width: calc(100% -107px);
-    text-shadow: 2px 2px black;
+    text-shadow: 2px 2px #474747;
 }
