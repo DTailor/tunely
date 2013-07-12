@@ -3,9 +3,15 @@ tunely_app.config(function ($interpolateProvider) {
     $interpolateProvider.endSymbol('>>');
 });
 
-function tune_player($scope, init_constants) {
+tunely_app
+    .config(function ($httpProvider) {
+        delete $httpProvider.defaults.headers.common['X-Requested-With'];
+    });
 
-//    FUNCTIONS  AND HELPERS
+
+function tune_player($scope, $http, init_constants) {
+
+
 
 //    TRACKLIST SUFFLER
     var shuffle_tracks = function (o) { //v1.0
@@ -27,20 +33,21 @@ function tune_player($scope, init_constants) {
     $scope.get_tracklist = function (playlist_id, client_id) {
         var link = "http://api.soundcloud.com/playlists/" + playlist_id + ".json?client_id=" + client_id;
         var tracklist = [];
-        $.ajax({
-            async: false,
-            type: 'GET',
-            url: link,
-            success: function (data) {
+        $http({method: 'GET', url: link}).
+            success(function (data, status, headers, config) {
                 if (typeof(data) === 'string') {
                     data = jQuery.parseJSON(data);
                 }
                 for (var i = 0; i < data['track_count']; i++) {
                     tracklist.push(data['tracks'][i]);
                 }
-            }
-        });
-        $scope.player.tracklist = shuffle_tracks(tracklist);
+                $scope.player.tracklist = shuffle_tracks(tracklist);
+                $scope.tracklist_ready = true;
+            }).
+            error(function (data, status, headers, config) {
+                // TODO: Implement some error handling
+            });
+
     };
 
 //    STATIONS TOGGLER
@@ -97,21 +104,23 @@ function tune_player($scope, init_constants) {
 //  PLAY/PAUSE PLAYER
 
     $scope.play_pause_player = function () {
+        if ($scope.tracklist_ready) {
 
-        if ($scope.player.playing) {
-            $scope.stream.pause();
-        }
-        else {
-            if ($scope.player.first_start) {
-                $scope.set_tracks();
-                $scope.player.first_start = false;
-                $scope.init_player();
-                $scope.player.controls_open = !$scope.player.controls_open;
-            } else {
-                $scope.stream.play();
+            if ($scope.player.playing) {
+                $scope.stream.pause();
             }
+            else {
+                if ($scope.player.first_start) {
+                    $scope.set_tracks();
+                    $scope.player.first_start = false;
+                    $scope.init_player();
+                    $scope.player.controls_open = !$scope.player.controls_open;
+                } else {
+                    $scope.stream.play();
+                }
+            }
+            $scope.player.playing = !$scope.player.playing;
         }
-        $scope.player.playing = !$scope.player.playing;
 
     };
 
