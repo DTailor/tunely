@@ -55,9 +55,7 @@ function tune_player($scope, init_constants) {
     $scope.set_tracks = function () {
 
         if ($scope.player.next_track) {
-            console.log('next song to be played:');
             $scope.player.current_track = $scope.player.next_track;
-            console.log($scope.player.current_track);
             $scope.player.next_track = $scope.player.tracklist[ $scope.player.tracklist.length - 1];
             $scope.player.tracklist.pop($scope.player.tracklist[$scope.player.tracklist.length - 1]);
         } else {
@@ -65,25 +63,20 @@ function tune_player($scope, init_constants) {
             $scope.player.tracklist.pop($scope.player.tracklist[$scope.player.tracklist.length - 1]);
             $scope.player.next_track = $scope.player.tracklist[ $scope.player.tracklist.length - 1];
             $scope.player.tracklist.pop($scope.player.tracklist[$scope.player.tracklist.length - 1]);
-            console.log($scope.player.current_track);
         }
     };
 
 //    STREAM INITIALIZATION
 
     $scope.init_player = function () {
-//        document.title = $scope.current_track.title;
-        console.log('init player');
         SC.stream('/tracks/' + $scope.player.current_track.id, {
                 onload: function (status) {
                 },
                 onfinish: function () {
-                    console.log('finished_track');
                     $scope.set_tracks();
                     $scope.init_player();
                 },
                 onready: function (b) {
-                    console.log(b);
                 }
             },
 
@@ -107,18 +100,15 @@ function tune_player($scope, init_constants) {
 
         if ($scope.player.playing) {
             $scope.stream.pause();
-            console.log('paused')
         }
         else {
             if ($scope.player.first_start) {
                 $scope.set_tracks();
                 $scope.player.first_start = false;
                 $scope.init_player();
-                console.log('start song');
                 $scope.player.controls_open = !$scope.player.controls_open;
             } else {
                 $scope.stream.play();
-                console.log('resume')
             }
         }
         $scope.player.playing = !$scope.player.playing;
@@ -173,7 +163,6 @@ function tune_player($scope, init_constants) {
 
 //    MUTE_UNMUTE SOUND
     $scope.mute_unmute = function () {
-        console.log('mute_unmute');
         if ($scope.player.mute) {
             $scope.stream.setVolume($scope.player.volume);
             $scope.player.mute = false;
@@ -218,7 +207,6 @@ function tune_player($scope, init_constants) {
 
     $scope.send_feedback = function (feedback) {
         if ($scope.feedback.length) {
-            console.log($scope.feedback.length);
             var msg = $('#fdb_text').val();
             var address = $('form[name=write_me]').attr('action');
             var dataString = 'feedback=' + msg;
