@@ -46,6 +46,8 @@ function tune_player($scope, init_constants) {
 //    STATIONS TOGGLER
     $scope.open_stations = function () {
         $scope.player.playlist_open = !$scope.player.playlist_open;
+        $scope.player.controls_open = false;
+
     };
 
 //  SET NEXT TRACK
@@ -113,7 +115,7 @@ function tune_player($scope, init_constants) {
                 $scope.player.first_start = false;
                 $scope.init_player();
                 console.log('start song');
-                $('.panel').toggleClass('active');
+                $scope.player.controls_open = !$scope.player.controls_open;
             } else {
                 $scope.stream.play();
                 console.log('resume')
@@ -127,7 +129,12 @@ function tune_player($scope, init_constants) {
 
     $scope.view_track_info = function () {
         if (!$scope.player.first_start) {
-            $('.panel').toggleClass('active');
+            if ($scope.player.controls_open) {
+                $scope.player.controls_open = false;
+            } else {
+                $scope.player.controls_open = true;
+            }
+
             $scope.player.playlist_open = false;
         }
     };
@@ -147,7 +154,7 @@ function tune_player($scope, init_constants) {
         $scope.player.playlist_open = false;
         $scope.init_player();
         if ($scope.player.first_start) {
-            $('.panel').toggleClass('active');
+            $scope.player.controls_open = true;
             $scope.player.first_start = false;
         }
         $scope.player.playing = true;
@@ -182,7 +189,7 @@ function tune_player($scope, init_constants) {
     $scope.volume_bar = function ($event) {
 
         var clickY = $('.player-volume-bar').height() - ($event.pageY - $('.player-volume-bar').offset().top);
-        $scope.player.volume = Math.round(( clickY / $scope.player.volumeHeight )*100);
+        $scope.player.volume = Math.round(( clickY / $scope.player.volumeHeight ) * 100);
         if ($scope.player.volume > 100) {
             $scope.player.volume = 100;
         }
@@ -200,16 +207,17 @@ function tune_player($scope, init_constants) {
             if ($event.target.className === "audioplayer-volume-button" || $event.target.className === "volume-icon") {
                 $scope.mute_unmute();
             }
-            else{$scope.volume_bar($event);}
+            else {
+                $scope.volume_bar($event);
+            }
         }
     };
 
 
-
 //    FEEDBACK
 
-    $scope.send_feedback = function(feedback){
-        if($scope.feedback.length){
+    $scope.send_feedback = function (feedback) {
+        if ($scope.feedback.length) {
             console.log($scope.feedback.length);
             var msg = $('#fdb_text').val();
             var address = $('form[name=write_me]').attr('action');

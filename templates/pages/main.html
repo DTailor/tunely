@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block panel %}
-    <div class="panel">
+    <div class="panel" ng-class="{ 'active':player.controls_open }" >
         {% include 'components/controls.html' %}
     </div>
 {% endblock %}
