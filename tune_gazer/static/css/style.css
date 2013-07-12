@@ -63,6 +63,9 @@ a {
 
 .panel {
     color: #fff;
+    position: fixed;
+    left: 50%;
+    margin-left: -175px;
 }
 
 .song_user {
