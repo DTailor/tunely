@@ -23,13 +23,3 @@ Setting Up
 P.S. You can create a local_settings.py file and activate debug mode by overriding the original settings.
 
 
-To Do
------
-
-1.   Make the song fetcher and playlist creator runnable from console.
-2.   New playlist selector concept, more user friendly.
-3.   Sitemap
-4.   Image feed from tumbrl
-5.   And a lot of tasks which are stored in asana :D
-
-P.S. They're not written in the execution order, except the first one.
