@@ -353,7 +353,7 @@ li.volume-control:hover > .audioplayer-volume-adjust {
 .stations_content {
     position: relative;
     float: left;
-    width: 350px;
+    width: 315px;
     height: 145px;
     /*background: #2c3e50;*/
     -webkit-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
@@ -401,7 +401,7 @@ li.volume-control:hover > .audioplayer-volume-adjust {
 
 .tune_station::before {
     content: attr(data-title);
-    font-size: 18px;
+    font-size: 16px;
     color: rgba(255, 255, 255, 0.78);
     border-bottom: 1px solid rgba(255, 255, 255, 0.49);
     text-shadow: 2px 2px #474747;
