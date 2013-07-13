@@ -420,7 +420,7 @@ li.volume-control:hover > .audioplayer-volume-adjust {
     position: relative;
     top: -60px;
     left: 110px;
-    width: calc(100% - 107px);
+    width: calc(100% - 65px);
     text-shadow: 2px 2px #474747;
 }
 
