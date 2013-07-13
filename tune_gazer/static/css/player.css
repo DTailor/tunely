@@ -353,7 +353,7 @@ li.volume-control:hover > .audioplayer-volume-adjust {
 .stations_content {
     position: relative;
     float: left;
-    width: 315px;
+    width: 380px;
     height: 145px;
     /*background: #2c3e50;*/
     -webkit-transition: color .25s ease, background-color .25s ease, opacity .5s ease;
