@@ -121,6 +121,7 @@ function tune_player($scope, $http, init_constants) {
                     $scope.player.first_start = false;
                     $scope.init_player();
                     $scope.player.controls_open = !$scope.player.controls_open;
+                    $scope.player.playlist_open = false;
                 } else {
                     $scope.stream.play();
                 }
