@@ -1,6 +1,27 @@
 <div class="audioplayer" ng-class="{ 'audioplayer-playing':player.playing, 'audioplayer-mute':player.mute } ">
     <div class="audioplayer-playpause" ng-class="{ playing:player.playing, pause:player.playing }" title="Play"
-         ng-click="play_pause_player()"><a href="#">Play</a></div>
+         ng-click="play_pause_player()">
+        <a href="#" ng-class="{'hide':!tracklist_ready}" class="hide">Play</a>
+
+        <div id="floatingCirclesG" ng-class="{'hide':tracklist_ready}">
+            <div class="f_circleG" id="frotateG_01">
+            </div>
+            <div class="f_circleG" id="frotateG_02">
+            </div>
+            <div class="f_circleG" id="frotateG_03">
+            </div>
+            <div class="f_circleG" id="frotateG_04">
+            </div>
+            <div class="f_circleG" id="frotateG_05">
+            </div>
+            <div class="f_circleG" id="frotateG_06">
+            </div>
+            <div class="f_circleG" id="frotateG_07">
+            </div>
+            <div class="f_circleG" id="frotateG_08">
+            </div>
+        </div>
+    </div>
     <div class="audioplayer-bar" ng-click="view_track_info()">
         <div class="station-title"
              id="<< player.playlist_id >>"
