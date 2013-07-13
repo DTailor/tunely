@@ -407,6 +407,12 @@ li.volume-control:hover > .audioplayer-volume-adjust {
     top: 25px;
 }
 
+
+.tune_station:hover:before{
+    border-bottom: 1px solid #f39c12;
+}
+
+
 .station_genres {
     color: rgba(255, 255, 255, 0.78);
     font-size: 15px;
