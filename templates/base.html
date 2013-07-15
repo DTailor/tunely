@@ -134,28 +134,13 @@
     </script>
     <script type="text/javascript" src="{% static 'js/tunegular.js' %}"></script>
 
-
 {% endcompress %}
-
 
 {% compress js %}
     {% block additionalJS %}
     {% endblock %}
 {% endcompress %}
-
 {% include 'components/feedback.html' %}
-
-{% if backgrounds %}
-    <script>
-        $.backstretch([
-            {% for background in backgrounds %}
-                "http://tunely.co/media/{{ background.bg_image }}",
-            {% endfor %}
-        ], {duration: 25000, fade: 750});
-    </script>
-{% endif %}
-
 </body>
-
 
 </html>

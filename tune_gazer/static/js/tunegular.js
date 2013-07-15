@@ -234,12 +234,68 @@ function tune_player($scope, $http, init_constants) {
     };
 
 
+//    TUMBRL WALLPAPERS
+
+    $scope.get_hashtag = function () {
+        var time = new Date();
+        var hour = time.getHours();
+        if (11 < hour && hour <= 17) {
+            time = 'tunelyday'
+        }
+        else if (17 < hour && hour <= 21) {
+            time = 'tunelyevening'
+        }
+        else if (21 < hour && hour < 24 || hour <= 6) {
+            time = 'tunelynight'
+        }
+        else if (6 < hour && hour < 11) {
+            time = 'tunelymorning'
+        }
+        return time;
+    };
+
+    $scope.get_wallpapers = function (hashtag) {
+        myJsonpCallback = function (data) {
+            var posts = data.response.posts;
+            $scope.wallpapers = [];
+            var length = posts.length,
+                post = null;
+            var wallpaper_item = '';
+
+            for (var i = 0; i < length; i++) {
+                post = posts[i];
+                wallpaper_item = post.photos[0].original_size['url'];
+                $scope.wallpapers.push(wallpaper_item);
+                // Do something with element i.
+            }
+            console.log();
+            $.backstretch($scope.wallpapers, {duration: 25000, fade: 750});
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "http://api.tumblr.com/v2/blog/tunelyco.tumblr.com/posts/photo?",
+            dataType: "jsonp",
+            data: {
+                format: "json",
+                tag: hashtag,
+                api_key: "GmNbPg7MEOqVrijicCcnsT639V8x8uzuBYheKjY5TQJ0NbuMrI",
+                jsonp: "myJsonpCallback"
+            }
+        });
+
+    };
+
+
     $scope.player = init_constants['Player'];
     $scope.stations = init_constants['radio_stations'];
     $scope.feedback = '';
     $scope.stream = false;
     $scope.sc_init();
     $scope.get_tracklist($scope.player.playlist_id, $scope.player.client_id);
+
+    var time = $scope.get_hashtag();
+    $scope.get_wallpapers(time);
 
     $(function () {
         $('a[rel*=leanModal]').leanModal({
