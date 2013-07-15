@@ -14,7 +14,7 @@ function tune_player($scope, $http, init_constants) {
 
 
 //    TRACKLIST SUFFLER
-    var shuffle_tracks = function (o) { //v1.0
+    var randomize = function (o) { //v1.0
         for (var j, x, i = o.length; i; j = parseInt(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
         return o;
     };
@@ -41,7 +41,7 @@ function tune_player($scope, $http, init_constants) {
                 for (var i = 0; i < data['track_count']; i++) {
                     tracklist.push(data['tracks'][i]);
                 }
-                $scope.player.tracklist = shuffle_tracks(tracklist);
+                $scope.player.tracklist = randomize(tracklist);
                 $scope.tracklist_ready = true;
             }).
             error(function (data, status, headers, config) {
@@ -269,6 +269,7 @@ function tune_player($scope, $http, init_constants) {
                 // Do something with element i.
             }
             console.log();
+            $scope.wallpapers = randomize($scope.wallpapers);
             $.backstretch($scope.wallpapers, {duration: 25000, fade: 750});
         };
 
