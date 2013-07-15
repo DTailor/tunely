@@ -16,7 +16,7 @@ Setting Up
 8.   run `migrate tune_gazer`
 9.   `chmod +x manage.py`
 10.  Configure GMAIL and SOUNDCLOUD data in `settings.py` file  
-11.  Add a sample station and background
+11.  Add a sample station
 12.  `./manage.py runserver`
 13.  access [localhost:8000](localhost:8000)
 
