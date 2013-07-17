@@ -14,7 +14,7 @@
 
 /* SITE */
 
-    Last update: 2013/07/14
+    Last update: 2013/07/17
     Language:  English
     Doctype: HTML5, CSS3, JS
     Technology: Django 1.5

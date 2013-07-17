@@ -78,6 +78,9 @@ function tune_player($scope, $http, init_constants) {
     $scope.init_player = function () {
         SC.stream('/tracks/' + $scope.player.current_track.id, {
                 onload: function (status) {
+                    if(!status){
+                        $scope.skip_track();
+                    }
                 },
                 onfinish: function () {
                     $scope.set_tracks();
