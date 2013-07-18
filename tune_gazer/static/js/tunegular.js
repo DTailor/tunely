@@ -9,7 +9,7 @@ tunely_app
     });
 
 
-function tune_player($scope, $http, init_constants) {
+function tune_player($scope, $http, $timeout, init_constants) {
 
 
 
@@ -78,7 +78,7 @@ function tune_player($scope, $http, init_constants) {
     $scope.init_player = function () {
         SC.stream('/tracks/' + $scope.player.current_track.id, {
                 onload: function (status) {
-                    if(!status){
+                    if (!status) {
                         $scope.skip_track();
                     }
                 },
@@ -161,6 +161,8 @@ function tune_player($scope, $http, init_constants) {
             $scope.player.first_start = false;
         }
         $scope.player.playing = true;
+        $scope.wallpaper_handler();
+        console.log($scope.player.slug);
 
     };
 
@@ -257,29 +259,34 @@ function tune_player($scope, $http, init_constants) {
         return time;
     };
 
-    $scope.get_wallpapers = function (hashtag) {
+    $scope.get_wallpaper = function (hashtag) {
         myJsonpCallback = function (data) {
             var posts = data.response.posts;
             $scope.wallpapers = [];
+            $scope.wallpapers.length = 0;
             var length = posts.length,
                 post = null;
             var wallpaper_item = '';
-
-            for (var i = 0; i < length; i++) {
-                post = posts[i];
-                wallpaper_item = post.photos[0].original_size['url'];
-                $scope.wallpapers.push(wallpaper_item);
-                // Do something with element i.
+            if (length > 0) {
+                for (var i = 0; i < length; i++) {
+                    post = posts[i];
+                    wallpaper_item = post.photos[0].original_size['url'];
+                    $scope.wallpapers.push(wallpaper_item);
+                }
+                $scope.wallpapers = randomize($scope.wallpapers);
+                $.backstretch($scope.wallpapers, {duration: 1000, fade: 750});
             }
-            console.log();
-            $scope.wallpapers = randomize($scope.wallpapers);
-            $.backstretch($scope.wallpapers, {duration: 25000, fade: 750});
+            else {
+                var time = $scope.get_hashtag();
+                $scope.get_wallpaper(time);
+            }
         };
 
         $.ajax({
             type: "GET",
             url: "http://api.tumblr.com/v2/blog/tunelyco.tumblr.com/posts/photo?",
             dataType: "jsonp",
+            async: false,
             data: {
                 format: "json",
                 tag: hashtag,
@@ -287,7 +294,11 @@ function tune_player($scope, $http, init_constants) {
                 jsonp: "myJsonpCallback"
             }
         });
+    };
 
+    $scope.wallpaper_handler = function(){
+        var station_hashtag = $scope.player.slug.split('-').join('');
+        $scope.get_wallpaper(station_hashtag);
     };
 
 
@@ -297,9 +308,9 @@ function tune_player($scope, $http, init_constants) {
     $scope.stream = false;
     $scope.sc_init();
     $scope.get_tracklist($scope.player.playlist_id, $scope.player.client_id);
+    $scope.wallpaper_handler();
 
-    var time = $scope.get_hashtag();
-    $scope.get_wallpapers(time);
+
 
     $(function () {
         $('a[rel*=leanModal]').leanModal({
