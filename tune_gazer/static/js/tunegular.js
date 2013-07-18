@@ -274,7 +274,7 @@ function tune_player($scope, $http, $timeout, init_constants) {
                     $scope.wallpapers.push(wallpaper_item);
                 }
                 $scope.wallpapers = randomize($scope.wallpapers);
-                $.backstretch($scope.wallpapers, {duration: 1000, fade: 750});
+                $.backstretch($scope.wallpapers, {duration: 25000, fade: 750});
             }
             else {
                 var time = $scope.get_hashtag();
