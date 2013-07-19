@@ -253,9 +253,10 @@ function tune_player($scope, $http, $timeout, init_constants) {
         else if (21 < hour && hour < 24 || hour <= 6) {
             time = 'tunelynight'
         }
-        else if (6 < hour && hour < 11) {
+        else if (6 < hour && hour <= 11) {
             time = 'tunelymorning'
         }
+
         return time;
     };
 
