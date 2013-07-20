@@ -5,9 +5,9 @@ from django.conf import settings
 
 from bs4 import BeautifulSoup
 
-sys.path.append('yt_fetcher')
+# sys.path.append('yt_fetcher')
 sys.path.append('..')
-sys.path.append('../../web_radio/')
+sys.path.append('../../tunely/')
 os.environ['DJANGO_SETTINGS_MODULE'] = "settings"
 
 import soundcloud
@@ -46,23 +46,24 @@ def getLinks(pageContent):
 
 
 def getTracks(plstID, station_name, userUploads=False):
-    for i in xrange(0, 500): # Youtube max playlist length is 200
+    if Station.objects.all():
+        for i in xrange(310, 500): # Youtube max playlist length is 200
 
-        if userUploads:
-            content = fetch(makeUserUploadsJson(id=plstID, index=i))
-        else:
-            content = fetch(makePlaylistJson(id=plstID, index=i))
-        soup = BeautifulSoup(content)
-        for a in soup.find_all('link'):
-            try:
-                if a['type'] == 'text/html' and (str(a['href']).find('watch') != -1):
-                    video = BeautifulSoup(fetch(a['href']))
-                    tempTile = video.find_all(id='eow-title')[0]['title']
-                    print i, '. ', tempTile
-                    station, rs = Station.objects.get_or_create(name=station_name)
-                    track, cr = Track.objects.get_or_create(yt_name=tempTile, station_name=station)
-            except:
-                pass
+            if userUploads:
+                content = fetch(makeUserUploadsJson(id=plstID, index=i))
+            else:
+                content = fetch(makePlaylistJson(id=plstID, index=i))
+            soup = BeautifulSoup(content)
+            for a in soup.find_all('link'):
+                try:
+                    if a['type'] == 'text/html' and (str(a['href']).find('watch') != -1):
+                        video = BeautifulSoup(fetch(a['href']))
+                        tempTile = video.find_all(id='eow-title')[0]['title']
+                        print i, '. ', tempTile
+                        station, rs = Station.objects.get_or_create(name=station_name)
+                        track, cr = Track.objects.get_or_create(yt_name=tempTile, station_name=station)
+                except:
+                    pass
 
 
 ########INDEX_WITH_SOUNDCLOUD##########################
@@ -78,7 +79,7 @@ def index_with_sc(station_name):
             yt_name = "".join(replacements.get(c, c) for c in track.yt_name)
             tracks = client.get('/tracks', q=yt_name)
             rsp = tracks[0].obj
-            try:
+            if rsp['duration'] / 60000 < 10:
                 track.sc_id = rsp['id']
                 track.sc_name = rsp['title']
                 track.sc_artist = rsp['user']['username']
@@ -86,8 +87,8 @@ def index_with_sc(station_name):
                 track.save()
                 print '%s / %s' % (index, total)
                 # print 'ad'
-            except:
-                print 'error-> %s / %s' % (index, total)
+            else:
+                print 'playlist warning -> %s ' % rsp['title']
 
         except:
             try:
@@ -152,17 +153,14 @@ def updateSetMF(pl_name):
             print result
 
 
-STATIONS = {}
-
 # updateSet('Majestic')
 # Step one
 # Get youtube tracks into DB
 # getTracks playlist_id_youtube playlist_id_local
-# getTracks('Kriemfield', 'Kriemfield', userUploads=True)
+# getTracks('OneChilledPanda', 'OneChilledPanda', userUploads=True)
 
 # Match with soundcloud
-# index_with_sc('Kriemfield')
+# index_with_sc('OneChilledPanda')
 
 # Update set on soundcloud
-# 5562532
-updateSet('Kriemfield', True)
+# updateSet('OneChilledPanda', True)
