@@ -12,9 +12,9 @@ Setting Up
 4.   `pip install -r requirements.txt`
 5.   `cp tunely/sample_local_settings.py tunely/local_settings.py`
 5.   fill the data in `local_settings.py` file
-6.   run `syncdb`
-7.   run `migrate tune_gazer`
-8.   `chmod +x manage.py`
+6.   `chmod +x manage.py`
+7.   run `./manage.py syncdb`
+8.   run `./migrate tune_gazer`
 9.  Add a sample station
 10.  `./manage.py runserver`
 11.  access [localhost:8000](localhost:8000)
