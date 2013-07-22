@@ -111,7 +111,7 @@ body {
     background-size: cover;
     min-width: 320px;
     min-height: 480px;
-    font-family: 'Open Sans', sans-serif ;
+    font-family: 'Open Sans', sans-serif;
 
 }
 
@@ -170,20 +170,16 @@ footer {
     margin: 10px;
 }
 
-
 .links a:hover {
     background: #eb3755;
     color: #fff;
 }
-
-
 
 .content p:nth-child(3n+0) {
     color: #c96;
 }
 
 /* No CSS3 support */
-
 
 .sidebar-nav {
     padding: 9px 0;
@@ -240,6 +236,15 @@ footer {
     left: -246px !important;
     height: 191px;
     background: url("../img/arrow-down.gif") 0 100% no-repeat;
+}
+
+.backstretch {
+    background: rgba(46, 204, 113, 0.71) url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAHklEQVQIW2NkQAX/GZH4/4FsRpgAmAOSBBFwDkgAAIKuBATRTAAZAAAAAElFTkSuQmCC") left top repeat;
+
+}
+
+.backstretch img {
+    opacity: 0.80;
 }
 
 /* No CSS3 support: none */
