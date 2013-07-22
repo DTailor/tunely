@@ -36,7 +36,7 @@ SECRET_KEY = "sample_key"
 
 MANAGERS = ADMINS
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 TIME_ZONE = 'America/Chicago'
 
