@@ -23,14 +23,3 @@ class Track(models.Model):
 
     def __unicode__(self):
         return self.yt_name
-
-
-class Background(models.Model):
-    dayparts = (
-        (1, 'day'),
-        (2, 'evening'),
-        (3, 'night'),
-        (4, 'morning'),
-    )
-    daypart = models.IntegerField(choices=dayparts, default=1)
-    bg_image = models.ImageField(max_length=400, upload_to='backgrounds')

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from tune_gazer.models import Station, Track, Background
+from tune_gazer.models import Station, Track
 
 
 class TrackAdmin(admin.ModelAdmin):
@@ -8,5 +8,4 @@ class TrackAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Station)
-admin.site.register(Background)
 admin.site.register(Track, TrackAdmin)
