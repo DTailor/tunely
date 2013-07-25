@@ -20,6 +20,7 @@ def home(request):
 
 
 def get_station(request, station_slug):
+    station_slug = ''.join(e for e in station_slug if e.isalnum()).lower()
     stations = Station.objects.select_related().filter(public=True)
     station = get_object_or_404(Station, slug=station_slug)
 
