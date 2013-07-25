@@ -47,7 +47,7 @@ def getLinks(pageContent):
 
 def getTracks(plstID, station_name, userUploads=False):
     if Station.objects.all():
-        for i in xrange(310, 500): # Youtube max playlist length is 200
+        for i in xrange(500, 1000): # Youtube max playlist length is 200
 
             if userUploads:
                 content = fetch(makeUserUploadsJson(id=plstID, index=i))
@@ -85,10 +85,11 @@ def index_with_sc(station_name):
                 track.sc_artist = rsp['user']['username']
                 track.soundcloud = True
                 track.save()
-                print '%s / %s' % (index, total)
+                # print '%s / %s' % (index, total)
                 # print 'ad'
             else:
-                print 'playlist warning -> %s ' % rsp['title']
+                print 'playlist warning -> %s | yt_name -> %s' % (rsp['title'], yt_name)
+
 
         except:
             try:
@@ -105,7 +106,7 @@ def index_with_sc(station_name):
                 except:
                     print 'error-> %s / %s' % (index, total)
             except:
-                print 'pass -> %s / %s' % (index, total)
+                print 'pass -> %s / %s | yt_name -> %s ' % (index, total, track.yt_name)
     print 'finished'
 
 
@@ -118,7 +119,7 @@ def createSet():
 def updateSet(pl_name, new_set=False):
     station = Station.objects.get(name=pl_name)
     track_ids = list()
-    for track in Track.objects.filter(station_name=station, soundcloud=True):
+    for track in Track.objects.filter(station_name=station, soundcloud=True)[:400]:
         track_ids.append(track.sc_id)
     tracks = map(lambda id: dict(id=id), track_ids)
     if not new_set:
@@ -130,17 +131,18 @@ def updateSet(pl_name, new_set=False):
                 })
                 print result
     else:
-        client.post('/playlists', playlist={
+        playlist = client.post('/playlists', playlist={
             'title': pl_name,
             'sharing': 'public',
             'tracks': tracks
         })
+    print playlist.id
 
 
 def updateSetMF(pl_name):
     station = Station.objects.get(name=pl_name)
     track_ids = list()
-    for track in Track.objects.filter(station_name=station, soundcloud=True)[:1]:
+    for track in Track.objects.filter(station_name=station, soundcloud=True):
         track_ids.append(track.sc_id)
     tracks = map(lambda id: dict(id=id), track_ids)
 
@@ -157,10 +159,10 @@ def updateSetMF(pl_name):
 # Step one
 # Get youtube tracks into DB
 # getTracks playlist_id_youtube playlist_id_local
-# getTracks('OneChilledPanda', 'OneChilledPanda', userUploads=True)
+# getTracks('Etonmessy', 'Etonmessy', True)
 
 # Match with soundcloud
-# index_with_sc('OneChilledPanda')
+# index_with_sc('Etonmessy')
 
 # Update set on soundcloud
-# updateSet('OneChilledPanda', True)
+updateSet('Etonmessy', True)
