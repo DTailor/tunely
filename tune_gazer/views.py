@@ -10,7 +10,7 @@ from utils.helpers import mail
 
 def home(request):
     stations = Station.objects.filter(public=True)
-    station = Station.objects.filter(public=True).order_by('?')[0]
+    station = stations.order_by('?')[0]
 
     page = render_to_string('pages/main.html', {'stations': stations,
                                                 'station': station,
