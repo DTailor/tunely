@@ -4,7 +4,7 @@ tunely
 Here is hosted the source code of the new refactored [tunely](http://tunely.co) web-app. 
 
 Setting Up
--------------
+---
 
 1.   `git clone https://github.com/DTailor/tunely.git`
 2.   `virtualenv tunely_env`
@@ -22,3 +22,10 @@ Setting Up
 P.S. You can create a local_settings.py file and activate debug mode by overriding the original settings.
 
 
+
+Running Tests
+---
+
+1.   `mkdir tune_gazer/fixtures`
+2.   `python manage.py dumpdata tune_gazer > tune_gazer/fixtures/test_fixture.json`
+3.   `python manage.py test tune_gazer`
