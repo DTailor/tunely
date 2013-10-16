@@ -238,6 +238,15 @@ footer {
     background: url("../img/arrow-down.gif") 0 100% no-repeat;
 }
 
+#iframe-stmblpn-widget-1 {
+    margin-right: 3px !important;
+}
+
+.surfinbird__like_iframe {
+    position: relative;
+    top: 2px;
+}
+
 .backstretch {
     background: rgba(46, 204, 113, 0.71) url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAHklEQVQIW2NkQAX/GZH4/4FsRpgAmAOSBBFwDkgAAIKuBATRTAAZAAAAAElFTkSuQmCC") left top repeat;
 

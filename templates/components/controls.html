@@ -1,19 +1,45 @@
 <div class="skip_song" ng-click="skip_track()"><i class="icon-step-forward"></i></div>
 
-<div class="song_user"> << player.current_track.user.username >> </div>
+<div class="song_user"> << player.current_track.user.username >></div>
 <div class="song_title"> << player.current_track.title >></div>
 
 
 <div class="sc_button">
-    <a style="text-decoration: none;" target="_blank" href="<< player.current_track.permalink_url >>"><i class="icon-soundcloud"></i></a>
+    <a style="text-decoration: none;" target="_blank" href="<< player.current_track.permalink_url >>"><i
+            class="icon-soundcloud"></i></a>
 </div>
 <div class="social_share">
-    <a id="fb_station_share" style="text-decoration: none;" href="http://www.facebook.com/sharer.php?u=<< 'http://tunely.co/' + player.slug >>" target="_blank">
+    <a id="fb_station_share" style="text-decoration: none;"
+       href="http://www.facebook.com/sharer.php?u=<< 'http://tunely.co/' + player.slug >>" target="_blank">
         <i class="icon-facebook"></i>
     </a>
-    <a id="tw_station_share" style="text-decoration: none;" href="http://twitter.com/share?text=Listen to  << player.station >> station @tunelyCo&url=http://tunely.co/<< player.slug >>" target="_blank">
+    <a id="tw_station_share" style="text-decoration: none;"
+       href="http://twitter.com/share?text=Listen to  << player.station >> station @tunelyCo&url=http://tunely.co/<< player.slug >>"
+       target="_blank">
         <i class="icon-twitter"></i>
     </a>
+
+    <!-- Place this tag where you want the su badge to render -->
+    <su:badge layout="4"></su:badge>
+
+    <!-- Place this snippet wherever appropriate -->
+    <script type="text/javascript">
+        (function () {
+            var li = document.createElement('script');
+            li.type = 'text/javascript';
+            li.async = true;
+            li.src = ('https:' == document.location.protocol ? 'https:' : 'http:') + '//platform.stumbleupon.com/1/widgets.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(li, s);
+        })();
+    </script>
+
+    <a target="_blank" class="surfinbird__like_button"
+       data-surf-config="{'layout': 'common-nocount-gray', 'width': '100', 'height': '21'}"
+       href="http://surfingbird.ru/share">Share</a>
+
+    <!-- Put this script tag after all buttons -->
+    <script type="text/javascript" charset="UTF-8" src="http://surfingbird.ru/share/share.min.js"></script>
 </div>
 
 {#<div class="ban_track">#}
