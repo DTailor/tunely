@@ -29,3 +29,7 @@ Running Tests
 1.   `mkdir tune_gazer/fixtures`
 2.   `python manage.py dumpdata tune_gazer > tune_gazer/fixtures/test_fixture.json`
 3.   `python manage.py test tune_gazer`
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/DTailor/tunely/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
